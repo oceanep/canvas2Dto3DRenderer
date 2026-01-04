@@ -1,23 +1,25 @@
-# Initialize raw2dto3D Project
+# TypeScript Migration Plan
 
 ## Goal Description
-Create a new project named "raw2dto3D" in the current directory. The project will use Vite as the build tool and the "vanilla" template (HTML + JS, no frameworks), as requested.
+Convert the existing Vanilla JS project to TypeScript. This involves setting up git, installing TypeScript, configuring it, and adding types to the existing `main.js` file.
 
 ## Proposed Changes
-### Project Initialization
-- Run `npx -y create-vite@latest raw2dto3D --template vanilla`
-- Change directory to `raw2dto3D`
-- Run `npm install` to install dependencies
+### Git
+- Initialize git repository and make the first commit.
 
-### File Structure (Scaffolding Result)
-[NEW] raw2dto3D/
-    - index.html
-    - main.js
-    - style.css
-    - package.json
-    - vite.config.js (if applicable, or default)
+### Configuration
+- [NEW] `tsconfig.json` - Standard Vite/TS configuration.
+- [MODIFY] `package.json` - Add `typescript` and `vite-plugin-checker`.
+
+### Codebase
+- [RENAME] `src/main.js` -> `src/main.ts`
+- [MODIFY] `index.html` - Update script source to `src/main.ts`
+- [MODIFY] `src/main.ts` - Add type annotations:
+    - Cast `game` to `HTMLCanvasElement`
+    - Type `ctx` as `CanvasRenderingContext2D`
+    - Type arguments for `point(x: number, y: number)`
 
 ## Verification Plan
 ### Automated Tests
-- Run `npm run dev` to ensure the dev server starts without errors.
-- Verify `package.json` does not contain React, Vue, or other framework dependencies.
+- Run `npm run dev` to ensure Vite handles the `.ts` file correctly.
+- Run `npx tsc --noEmit` to verify type safety.
